@@ -18,7 +18,7 @@ class LoginView extends GetView<LoginController> {
           statusBarIconBrightness: Brightness.light, // Ikon putih
         ),
       ),
-      backgroundColor: Color(0xFFF2F2F2), // Set background #F2F2F2
+      backgroundColor: AppColors.secondary, // Set background #F2F2F2
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

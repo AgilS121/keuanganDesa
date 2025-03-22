@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:keuangandesa/colors.dart';
 import '../controllers/main_controller.dart';
 import '../app/modules/home/views/home_view.dart';
 import '../app/modules/pengumuman/views/pengumuman_view.dart';
@@ -23,7 +24,7 @@ class MainView extends GetView<MainController> {
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changeTab,
-            selectedItemColor: Colors.blue,
+            selectedItemColor: AppColors.primary,
             unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

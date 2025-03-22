@@ -33,7 +33,7 @@ class LoginController extends GetxController {
       );
       // agar merplace laman ke home setelah login dan menghilangkan riwyat route
 
-      Get.offNamed('/main');
+      Get.offNamed('/mainadmin');
     } else if (emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
       Get.snackbar(

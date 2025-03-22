@@ -1,0 +1,2 @@
+/media/afif/OKE/Flutter/keuanganDesa/android/app/.cxx/Debug/6s18651a/x86_64/CMakeFiles/edit_cache.dir
+/media/afif/OKE/Flutter/keuanganDesa/android/app/.cxx/Debug/6s18651a/x86_64/CMakeFiles/rebuild_cache.dir
