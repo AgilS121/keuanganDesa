@@ -12,6 +12,7 @@ abstract class Routes {
   static const KEUANGAN = _Paths.KEUANGAN;
   static const HOME_ADMIN = _Paths.HOME_ADMIN;
   static const USER = _Paths.USER;
+  static const MENU_ADMIN = _Paths.MENU_ADMIN;
 }
 
 abstract class _Paths {
@@ -26,4 +27,5 @@ abstract class _Paths {
   static const KEUANGAN = '/keuangan';
   static const HOME_ADMIN = '/home-admin';
   static const USER = '/user';
+  static const MENU_ADMIN = '/menu-admin';
 }

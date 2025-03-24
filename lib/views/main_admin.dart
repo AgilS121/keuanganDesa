@@ -7,6 +7,7 @@ import '../app/modules/Tagihan/views/tagihan_view.dart';
 import '../app/modules/Keuangan/views/keuangan_view.dart';
 import '../app/modules/Warga/views/warga_view.dart';
 import '../app/modules/User/views/user_view.dart';
+import '../app/modules/MenuAdmin/views/menu_admin_view.dart';
 
 class MainAdminView extends GetView<MainAdminController> {
   @override
@@ -15,7 +16,7 @@ class MainAdminView extends GetView<MainAdminController> {
 
     final List<Widget> pages = [
       HomeAdminView(),
-      TagihanView(),
+      MenuAdminView(),
       KeuanganView(),
       UserView(),
     ];
@@ -30,7 +31,7 @@ class MainAdminView extends GetView<MainAdminController> {
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.receipt), label: 'Tagihan'),
+                  icon: Icon(Icons.pages_sharp), label: 'Menu'),
               //  icon untuk uang
               BottomNavigationBarItem(
                   icon: Icon(Icons.money), label: 'Keuangan'),

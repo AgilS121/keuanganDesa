@@ -181,7 +181,7 @@ class RegisterView extends GetView<RegisterController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                        onPressed: () => Get.toNamed('/lupaPassword'),
+                        onPressed: () => Get.offNamed('/login'),
                         child: Text(
                           'Sudah punya akun? Login',
                           style: TextStyle(

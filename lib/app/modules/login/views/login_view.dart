@@ -166,7 +166,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                         )),
                     TextButton(
-                        onPressed: () => Get.toNamed('/register'),
+                        onPressed: () => Get.offNamed('/register'),
                         child: Text(
                           'Daftar',
                           style: TextStyle(

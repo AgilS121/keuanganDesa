@@ -5,9 +5,13 @@ import '../../bindings/main_binding.dart';
 import '../../views/main.dart';
 import '../../views/main_admin.dart';
 import '../modules/HomeAdmin/bindings/home_admin_binding.dart';
+import '../modules/HomeAdmin/bindings/home_admin_binding.dart';
+import '../modules/HomeAdmin/views/home_admin_view.dart';
 import '../modules/HomeAdmin/views/home_admin_view.dart';
 import '../modules/Keuangan/bindings/keuangan_binding.dart';
 import '../modules/Keuangan/views/keuangan_view.dart';
+import '../modules/MenuAdmin/bindings/menu_admin_binding.dart';
+import '../modules/MenuAdmin/views/menu_admin_view.dart';
 import '../modules/Tagihan/bindings/tagihan_binding.dart';
 import '../modules/Tagihan/views/tagihan_view.dart';
 import '../modules/User/bindings/user_binding.dart';
@@ -78,6 +82,11 @@ class AppPages {
       name: _Paths.USER,
       page: () => const UserView(),
       binding: UserBinding(),
+    ),
+    GetPage(
+      name: _Paths.MENU_ADMIN,
+      page: () => const MenuAdminView(),
+      binding: MenuAdminBinding(),
     ),
   ];
 }
