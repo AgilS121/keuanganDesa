@@ -7,6 +7,7 @@ import '../app/modules/Tagihan/views/tagihan_view.dart';
 import '../app/modules/Keuangan/views/keuangan_view.dart';
 import '../app/modules/Warga/views/warga_view.dart';
 import '../app/modules/User/views/user_view.dart';
+import '../app/modules/riwayatkeuangan/views/riwayatkeuangan_view.dart';
 import '../app/modules/MenuAdmin/views/menu_admin_view.dart';
 
 class MainAdminView extends GetView<MainAdminController> {
@@ -17,7 +18,7 @@ class MainAdminView extends GetView<MainAdminController> {
     final List<Widget> pages = [
       HomeAdminView(),
       MenuAdminView(),
-      KeuanganView(),
+      RiwayatkeuanganView(),
       UserView(),
     ];
 
@@ -26,7 +27,7 @@ class MainAdminView extends GetView<MainAdminController> {
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changeTab,
-            selectedItemColor: AppColors.primary,
+            selectedItemColor: const Color.fromARGB(255, 65, 152, 132),
             unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

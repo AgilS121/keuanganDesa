@@ -50,6 +50,14 @@ class TagihanController extends GetxController {
     }
   }
 
+  var wargaList = <Map<String, String>>[
+    {"id": "1", "nama": "Budi Santoso"},
+    {"id": "2", "nama": "Siti Aminah"},
+    {"id": "3", "nama": "Rudi Hartono"},
+  ].obs;
+
+  var selectedWarga = "".obs;
+
   @override
   void onInit() {
     super.onInit();

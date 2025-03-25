@@ -1,23 +1,32 @@
 import 'package:get/get.dart';
 
+class Keuangan {
+  int jumlah;
+  String jenis; // "Pemasukan" atau "Pengeluaran"
+  String keterangan;
+
+  Keuangan(
+      {required this.jumlah, required this.jenis, required this.keterangan});
+}
+
 class KeuanganController extends GetxController {
-  //TODO: Implement KeuanganController
+  var keuanganList = <Keuangan>[].obs;
+  var filter = 'Semua'.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  List<Keuangan> get filteredKeuangan {
+    if (filter.value == 'Semua') return keuanganList;
+    return keuanganList.where((item) => item.jenis == filter.value).toList();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void addKeuangan(
+      {required int jumlah,
+      required String jenis,
+      required String keterangan}) {
+    keuanganList
+        .add(Keuangan(jumlah: jumlah, jenis: jenis, keterangan: keterangan));
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void setFilter(String value) {
+    filter.value = value;
   }
-
-  void increment() => count.value++;
 }

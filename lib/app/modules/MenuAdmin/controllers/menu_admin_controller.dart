@@ -26,9 +26,9 @@ class MenuAdminController extends GetxController {
     },
     {
       'id': 4,
-      'name': 'Acara',
+      'name': 'Jadwal Ronda',
       'icon': Icons.event,
-      'route': '/acara',
+      'route': '/jadwal-ronda',
     },
     {
       'id': 5,
@@ -38,9 +38,9 @@ class MenuAdminController extends GetxController {
     },
     {
       'id': 6,
-      'name': 'User',
+      'name': 'Data User',
       'icon': Icons.person,
-      'route': '/user',
+      'route': '/data-user',
     },
   ].obs; // Menggunakan .obs tanpa tanda kurung
   final count = 0.obs;

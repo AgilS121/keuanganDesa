@@ -11,23 +11,40 @@ class MenuAdminView extends GetView<MenuAdminController> {
   Widget build(BuildContext context) {
     final MenuAdminController controller = Get.put(MenuAdminController());
     return Scaffold(
-      appBar: CustomAppBar(title: 'Menu Admin'),
-      body: Center(
-        child: Obx(() => GridView.builder(
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // 2 kolom
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 1.0, // Rasio aspek kotak
-              ),
-              itemCount: controller.menu.length,
-              itemBuilder: (context, index) {
-                final item = controller.menu[index];
-                return _buildMenuItem(
-                    item['icon'], item['name'], item['route']);
-              },
-            )),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: CustomAppBar(title: 'Menu Admin')),
+      body: Container(
+        height: context.height,
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Membuat Column hanya sebesar isinya
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.center, // Memastikan posisi tengah
+              child: Obx(() => GridView.builder(
+                    shrinkWrap:
+                        true, // Pastikan GridView menyesuaikan tinggi kontennya
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1.0,
+                    ),
+                    itemCount: controller.menu.length,
+                    itemBuilder: (context, index) {
+                      final item = controller.menu[index];
+                      return _buildMenuItem(
+                          item['icon'], item['name'], item['route']);
+                    },
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:keuangandesa/app/components/custom_appbar.dart';
-
+import 'package:keuangandesa/colors.dart';
 import '../controllers/tagihan_controller.dart';
 
 class TagihanView extends GetView<TagihanController> {
@@ -17,7 +17,8 @@ class TagihanView extends GetView<TagihanController> {
           _showAddTagihanBottomSheet(context);
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.fourth,
+        foregroundColor: Colors.white,
       ),
       body: Container(
         margin: EdgeInsets.only(top: 10),
@@ -67,14 +68,49 @@ class TagihanView extends GetView<TagihanController> {
                 readOnly: true,
                 onTap: () => controller.selectDate(context),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
+              Obx(() => DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: "Pilih Warga",
+                      border: OutlineInputBorder(),
+                    ),
+                    value: controller.selectedWarga.value.isNotEmpty
+                        ? controller.selectedWarga.value
+                        : null,
+                    // hint: Text("Pilih Warga"),
+                    items: controller.wargaList.map((warga) {
+                      return DropdownMenuItem<String>(
+                        value: warga['id'], // Ambil ID warga sebagai value
+                        child: Text(warga['nama']!), // Tampilkan nama warga
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      controller.selectedWarga.value = value!;
+                    },
+                  )),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
-                onPressed: () {
-                  // _tambahTagihan();
-                  Navigator.pop(
-                      context); // Tutup bottom sheet setelah tambah data
-                },
-                child: Text("Simpan"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary, // Warna tombol
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Radius sudut
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ),
+                onPressed: () => {},
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.save,
+                        color: Colors.white), // Tambahkan icon refresh
+                    const SizedBox(width: 8), // Spasi antara icon dan teks
+                    const Text("Simpan Data",
+                        style: TextStyle(color: Colors.white)),
+                  ],
+                ),
               ),
               SizedBox(height: 10),
             ],
@@ -117,8 +153,8 @@ class TagihanView extends GetView<TagihanController> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: ListTile(
-              leading:
-                  Icon(Icons.receipt_long, color: Colors.blue), // Icon tagihan
+              leading: Icon(Icons.receipt_long,
+                  color: AppColors.fourth), // Icon tagihan
               title: Text(
                 tagihan["nama"], // Nama tagihan
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -139,7 +175,8 @@ class TagihanView extends GetView<TagihanController> {
                 children: [
                   IconButton(
                     iconSize: 17,
-                    icon: Icon(Icons.edit, color: Colors.blue),
+                    icon: Icon(Icons.edit,
+                        color: const Color.fromARGB(255, 184, 168, 24)),
                     onPressed: () {
                       Get.toNamed('/tagihan/edit', arguments: tagihan);
                     },

@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:keuangandesa/colors.dart';
 import '../controllers/main_controller.dart';
 import '../app/modules/home/views/home_view.dart';
-import '../app/modules/pengumuman/views/pengumuman_view.dart';
-import '../app/modules/acara/views/acara_view.dart';
+import '../app/modules/PengumumanUser/views/pengumuman_user_view.dart';
+import '../app/modules/riwayatkeuangan/views/riwayatkeuangan_view.dart';
 import '../app/modules/kontak/views/kontak_view.dart';
+import '../app/modules/user/views/user_view.dart';
 
 class MainView extends GetView<MainController> {
   @override
@@ -14,9 +15,9 @@ class MainView extends GetView<MainController> {
 
     final List<Widget> pages = [
       HomeView(),
-      PengumumanView(),
-      AcaraView(),
-      KontakView(),
+      PengumumanUserView(),
+      RiwayatkeuanganView(),
+      UserView(),
     ];
 
     return Scaffold(
@@ -30,9 +31,10 @@ class MainView extends GetView<MainController> {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.announcement), label: 'Pengumuman'),
-              BottomNavigationBarItem(icon: Icon(Icons.event), label: 'Acara'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.contact_phone), label: 'Kontak'),
+                  icon: Icon(Icons.money), label: 'Keuangan'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: 'Profil'),
             ],
           )),
     );

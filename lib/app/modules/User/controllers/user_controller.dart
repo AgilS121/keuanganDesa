@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class UserController extends GetxController {
   //TODO: Implement UserController
+  final username = 'Admin'.obs;
 
   final count = 0.obs;
   @override
