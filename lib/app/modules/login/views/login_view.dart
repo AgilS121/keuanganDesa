@@ -130,21 +130,41 @@ class LoginView extends GetView<LoginController> {
             ),
             Container(
               width: 320,
-              child: ElevatedButton(
+              child: Obx(() => ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF32BC9B),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       )),
                   onPressed: controller.login,
-                  child: Text(
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontFamily: 'Archivo',
-                        fontWeight: FontWeight.bold,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min, // Agar ukuran sesuai konten
+                    children: [
+                      if (controller
+                          .isLoading.value) // Tampilkan loading saat login
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: 8), // Beri jarak sebelum teks
+                          child: SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          ),
+                        ),
+                      Text(
+                        controller.isLoading.value ? 'Tunggu Bentar' : 'Login',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontFamily: 'Archivo',
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      'Login')),
+                    ],
+                  ))),
             ),
             SizedBox(
               height: 10,

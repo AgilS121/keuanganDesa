@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
+import 'package:keuangandesa/app/data/models/DataUserModel.dart';
+import 'package:keuangandesa/app/data/repositories/user_repository.dart';
 
 class User {
   final int id;
@@ -21,36 +23,39 @@ class User {
 }
 
 class DataUserController extends GetxController {
+  // repositori
+  final UserRepository _userRepository = UserRepository();
+
+  // loading
+  var isLoading = true.obs;
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nikController = TextEditingController();
 
-  var users = <User>[].obs;
-  var filteredUsers = <User>[].obs;
+  var users = <DataUserModel>[].obs;
+  var filteredUsers = <DataUserModel>[].obs;
+
+  void getUser() async {
+    final response = await _userRepository.getUser();
+    // print(response);
+    users.assignAll(response);
+    isLoading.value = false;
+    response.forEach((user) {
+      print('ID: ${user.id}, Name: ${user.name}, Email: ${user.email}');
+    });
+  }
 
   @override
   void onInit() {
     super.onInit();
-    users.assignAll([
-      User(
-          id: 1,
-          name: "John Doe",
-          address: "Jakarta",
-          email: "john@example.com",
-          password: "123456",
-          nik: "320101020304"),
-      User(
-          id: 2,
-          name: "Jane Smith",
-          address: "Bandung",
-          email: "jane@example.com",
-          password: "abcdef",
-          nik: "320101020305"),
-    ]);
-    filteredUsers.assignAll(users);
-    filteredUsers.assignAll(users);
+    getUser();
+    // Jangan langsung assign sebelum users terisi
+    ever(users, (callback) {
+      filteredUsers.assignAll(users);
+    });
   }
 
   void filterUsers(String query) {
@@ -72,7 +77,7 @@ class DataUserController extends GetxController {
       password: password,
       nik: nik,
     );
-    users.add(newUser);
+    // users.add(newUser);
     filterUsers(""); // Refresh daftar pengguna
   }
 

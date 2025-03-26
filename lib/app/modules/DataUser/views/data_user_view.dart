@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:keuangandesa/app/data/models/DataUserModel.dart';
 import 'package:keuangandesa/colors.dart';
 import '../controllers/data_user_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DataUserView extends GetView<DataUserController> {
   const DataUserView({super.key});
@@ -34,7 +36,13 @@ class DataUserView extends GetView<DataUserController> {
 
           // ListView Data Pengguna
           Expanded(
-            child: Obx(() => ListView.builder(
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                // Tampilkan Skeleton Loading saat data masih dimuat
+                return _buildSkeletonList();
+              } else {
+                // Tampilkan ListView saat data sudah tersedia
+                return ListView.builder(
                   itemCount: controller.filteredUsers.length,
                   itemBuilder: (context, index) {
                     final user = controller.filteredUsers[index];
@@ -50,18 +58,20 @@ class DataUserView extends GetView<DataUserController> {
                           IconButton(
                             icon: const Icon(Icons.edit,
                                 color: Color.fromARGB(255, 184, 168, 23)),
-                            onPressed: () => controller.editUser(user),
+                            onPressed: () {},
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => controller.deleteUser(user),
+                            onPressed: () {},
                           ),
                         ],
                       ),
                       onTap: () => Get.to(() => UserDetailView(user: user)),
                     );
                   },
-                )),
+                );
+              }
+            }),
           ),
         ],
       ),
@@ -171,9 +181,45 @@ void _showAddUserSheet(BuildContext context, DataUserController controller) {
   );
 }
 
+Widget _buildSkeletonList() {
+  return ListView.builder(
+    itemCount: 5, // Jumlah skeleton yang akan ditampilkan
+    itemBuilder: (context, index) {
+      return ListTile(
+        leading: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 25,
+          ),
+        ),
+        title: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 100,
+            height: 10,
+            color: Colors.white,
+          ),
+        ),
+        subtitle: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 150,
+            height: 10,
+            color: Colors.white,
+          ),
+        ),
+      );
+    },
+  );
+}
+
 // Halaman Detail Pengguna
 class UserDetailView extends StatelessWidget {
-  final User user;
+  final DataUserModel user;
 
   const UserDetailView({super.key, required this.user});
 
