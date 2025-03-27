@@ -2,11 +2,13 @@ class DataUserModel {
   final int id;
   final String name;
   final String email;
+  final String role;
 
   DataUserModel({
     required this.id,
     required this.name,
     required this.email,
+    required this.role,
   });
 
   factory DataUserModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +16,7 @@ class DataUserModel {
       id: json['id'],
       name: json['name'],
       email: json['email'],
+      role: json['role'],
     );
   }
 

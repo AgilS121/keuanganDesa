@@ -15,4 +15,16 @@ class UserProvider extends GetConnect {
       },
     );
   }
+
+  // buatkan function untuk store// Fungsi untuk POST (store) data user
+  Future<Response> storeUser(Map<String, dynamic> data) async {
+    return post(
+      '${baseUrl}api/postuser',
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      data, // Pastikan data dikirim dengan benar
+    );
+  }
 }

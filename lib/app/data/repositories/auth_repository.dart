@@ -14,8 +14,7 @@ class AuthRepository {
       box.write('token', user.token);
       return user;
     } else {
-      throw Exception(
-          'Gagal login: ${response.statusText}'); // Ubah sesuai kebutuhan
+      throw Exception('Gagal login: ${response}'); // Ubah sesuai kebutuhan
     }
   }
 }

@@ -134,6 +134,27 @@ void _showAddUserSheet(BuildContext context, DataUserController controller) {
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: "NIK"),
           ),
+          // tambahkan dropdown
+          const SizedBox(height: 10),
+          Obx(() {
+            return DropdownButtonFormField<String>(
+              value: controller
+                  .selectedRole.value, // Nilai yang dipilih dari controller
+              items: controller.roleList
+                  .map((role) => DropdownMenuItem(
+                        value: role,
+                        child: Text(role),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                if (value != null) controller.selectedRole.value = value;
+              },
+              decoration: const InputDecoration(
+                labelText: "Pilih Role",
+                border: OutlineInputBorder(),
+              ),
+            );
+          }),
 
           const SizedBox(height: 15),
           ElevatedButton(
@@ -146,16 +167,11 @@ void _showAddUserSheet(BuildContext context, DataUserController controller) {
             ),
             onPressed: () {
               if (controller.nameController.text.isNotEmpty &&
-                  controller.emailController.text.isNotEmpty &&
-                  controller.passwordController.text.isNotEmpty &&
-                  controller.nikController.text.isNotEmpty) {
-                controller.addUser(
-                  controller.nameController.text,
-                  controller.addressController.text,
-                  controller.emailController.text,
-                  controller.passwordController.text,
-                  controller.nikController.text,
-                );
+                      controller.emailController.text.isNotEmpty &&
+                      controller.passwordController.text.isNotEmpty
+                  // controller.nikController.text.isNotEmpty
+                  ) {
+                controller.addUser();
                 Get.back(); // Tutup Bottom Sheet
               } else {
                 Get.snackbar("Error", "Semua field harus diisi!",

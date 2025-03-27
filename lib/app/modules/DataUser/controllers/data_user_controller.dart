@@ -35,6 +35,13 @@ class DataUserController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nikController = TextEditingController();
 
+  var selectedRole = "User".obs; // Default role
+  var roleList = ["Admin", "User"].obs; // Daftar role
+
+  void setRole(String role) {
+    selectedRole.value = role;
+  }
+
   var users = <DataUserModel>[].obs;
   var filteredUsers = <DataUserModel>[].obs;
 
@@ -67,18 +74,40 @@ class DataUserController extends GetxController {
     }
   }
 
-  void addUser(
-      String name, String address, String email, String password, String nik) {
-    final newUser = User(
-      id: users.length + 1,
-      name: name,
-      address: address,
-      email: email,
-      password: password,
-      nik: nik,
-    );
-    // users.add(newUser);
-    filterUsers(""); // Refresh daftar pengguna
+  Future<void> addUser() async {
+    try {
+      final userData = {
+        "name": nameController.text,
+        // "address": addressController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+        // "nik": nikController.text,
+        "role": selectedRole.value
+      };
+
+      final newUser = await _userRepository.storeUser(userData);
+      users.add(newUser);
+      filterUsers(""); // Refresh daftar user
+
+      // Kosongkan field setelah berhasil submit
+      nameController.clear();
+      addressController.clear();
+      emailController.clear();
+      passwordController.clear();
+      nikController.clear();
+
+      Get.snackbar("Sukses", "User berhasil ditambahkan",
+          // posisi bottom
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
+    } catch (e) {
+      print(e);
+      Get.snackbar("Error", "Gagal menambah user: $e",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+    }
   }
 
   void editUser(User user) {

@@ -6,7 +6,7 @@ import '../app/modules/home/views/home_view.dart';
 import '../app/modules/PengumumanUser/views/pengumuman_user_view.dart';
 import '../app/modules/riwayatkeuangan/views/riwayatkeuangan_view.dart';
 import '../app/modules/kontak/views/kontak_view.dart';
-import '../app/modules/user/views/user_view.dart';
+import '../app/modules/User/views/user_view.dart';
 
 class MainView extends GetView<MainController> {
   @override
